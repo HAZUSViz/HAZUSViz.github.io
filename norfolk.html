@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiamFyZWxscGVyZXoiLCJhIjoiY2lyMmR4a3dyMDJ6bGZrbTgzNjZuajluZCJ9.k4HQw3aoAkOkNssgnjRJUg';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v9',
+    zoom: 13,
+    center: [-76.2859, 36.8508]
+});
+
+map.on('load', function () {
+    map.addSource('Norfolk', {
+        type: 'vector',
+        url: 'mapbox://jarellperez.b5h6isfy'
+    });
+    map.addLayer({
+        "id": "Norfolk",
+        "type": "fill",
+        "source": "Norfolk",
+        "source-layer": "Norfolk-dm7k2h",
+        "layout": {
+           visibility: 'visible' 
+        },
+        "paint": {
+            'fill-color': {
+              property: '_sum',
+              stops: [[0, '#160e23'], [2460.565085, '#291f3d'], [9889.894073, '#131e2f'], [25813.504845, '#106889'], [110388.642003, '#43afbf']]
+            },
+            'fill-extrude-height': {
+                'type': 'identity',
+                'property': "ELEV"
+            },
+            'fill-extrude-base': 0
+        },    
+        })
+    });
+</script>
+
+</body>
+</html>

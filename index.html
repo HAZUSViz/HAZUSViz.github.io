@@ -2,15 +2,53 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title></title>
+    <title>1933 Chesapeake-Potomac Hurricane</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
+        .legend {
+    background-color: #343332;
+    border-radius: 3px;
+    bottom: 30px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    z-index: 1;
+    color: #989898;        
+}
+
+.legend h4 {
+    margin: 0 0 10px;
+    color: #989898;
+}
+
+.legend div span {
+    border-radius: 50%;
+    display: inline-block;
+    height: 20px;
+    margin-right: 5px;
+    width: 20px;
+    
+}
     </style>
 </head>
+
+    <div id='state-legend' class='legend'>
+    <h4>Total Economic Loss</h4>
+    <div><span style='background-color: #43afbf'></span>$100,000,000</div>
+    <div><span style='background-color: #106889'></span>$25,000,000</div>
+    <div><span style='background-color: #131e2f'></span>$10,000,000</div>
+    <div><span style='background-color: #291f3d'></span>$2,500,000</div>
+    <div><span style='background-color: #160e23'></span>0</div>
+    <h5>*Styled by Census Block</h5>
+ 
+</div>
+    
 <body>
 
 <div id='map'></div>
@@ -46,9 +84,35 @@ map.on('load', function () {
                 'property': "ELEV"
             },
             'fill-extrude-base': 0
-        },    
+    
+        },  
         })
+     map.addSource('Portsmouth', {
+        type: 'vector',
+        url: 'mapbox://jarellperez.81c4987a'
     });
+    map.addLayer({
+        "id": "Portsmouth",
+        "type": "fill",
+        "source": "Portsmouth",
+        "source-layer": "postrmouth_2",
+        "layout": {
+           visibility: 'visible' 
+        },
+        "paint": {
+            'fill-color': {
+              property: '_sum',
+              stops: [[0, '#160e23'], [2460.565085, '#291f3d'], [9889.894073, '#131e2f'], [25813.504845, '#106889'], [110388.642003, '#43afbf']]
+            },
+            'fill-extrude-height': {
+                'type': 'identity',
+                'property': "HGT2dSP"
+            },
+            'fill-extrude-base': 0
+        }
+    })
+    });
+var stateLegendEl = document.getElementById('state-legend');    
 </script>
 
 </body>
