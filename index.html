@@ -35,6 +35,18 @@
     width: 20px;
     
 }
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
     </style>
 </head>
 
@@ -47,8 +59,8 @@
     <div><span style='background-color: #c7e9b4'></span>0</div>
     <div class='pad1 section clearfix'>
     <span class='small uppercase label strong'>Visualization</span>
-    <div><button type ='radio' onclick="tilt()">2d</button>
-        <button onclick="tiltb()">3d</button></div>
+    <div><button class ='button' onclick="tilt()">2D</button>
+        <button class='button' onclick="tiltb()">3D</button></div>
     </div>
     <h5>*Styled by Census Block</h5>
 </div>
@@ -82,8 +94,8 @@ map.on('load', function () {
               property: '_sum',
               stops: [[0, '#c7e9b4'], [2460.565085, '#7fcdbb'], [9889.894073, '#41b6c4'], [25813.504845, '#2c7fb8'], [110388.642003, '#253494']]
             },
-            'fill-extrude-base': 0
-    
+            'fill-extrude-base': 0,
+            'fill-antialias': true
         },  
         })
      map.addSource('Portsmouth', {
@@ -103,7 +115,7 @@ map.on('load', function () {
               property: '_sum',
               stops: [[0, '#c7e9b4'], [2460.565085, '#7fcdbb'], [9889.894073, '#41b6c4'], [25813.504845, '#2c7fb8'], [110388.642003, '#253494']]
             },
-            
+            'fill-antialias': true,
             'fill-extrude-base': 0
         }
     })
@@ -140,7 +152,7 @@ var stateLegendEl = document.getElementById('state-legend');
             'property': 'HGT2dSP'
         }
     )}
-
+    
 </script>
 
 </body>
