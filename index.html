@@ -59,39 +59,11 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFyZWxscGVyZXoiLCJhIjoiY2lyMmR4a3dyMDJ6bGZrbTgzNjZuajluZCJ9.k4HQw3aoAkOkNssgnjRJUg';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v9',
+    style: 'mapbox://styles/mapbox/light-v9',
     zoom: 13,
     center: [-76.2859, 36.8508],
 });
-    
-map.on('rotate',function(e) {
-    if (map.getPitch() > 50) {
-        map.setPaintProperty('Norfolk', 'fill-extrude-height',                   
-        {            
-            'type': 'identity',
-            'property': 'ELEV'
-        });
-        map.setPaintProperty('Portsmouth', 'fill-extrude-height',                   
-        {            
-            'type': 'identity',
-            'property': 'HGT2dSP'
-        }
-    )}
-    else {
-   map.setPaintProperty('Portsmouth', 'fill-extrude-height',                   
-        {            
-            'type': 'identity',
-            'property': ''
-        }
-    );
-    map.setPaintProperty('Norfolk', 'fill-extrude-height',                   
-        {            
-            'type': 'identity',
-            'property': ''
-         })
-     }   
-});
-    
+      
 map.on('load', function () {
     map.addSource('Norfolk', {
         type: 'vector',
@@ -108,7 +80,7 @@ map.on('load', function () {
         "paint": {
             'fill-color': {
               property: '_sum',
-              stops: [[0, '#160e23'], [2460.565085, '#291f3d'], [9889.894073, '#131e2f'], [25813.504845, '#106889'], [110388.642003, '#43afbf']]
+              stops: [[0, '#c7e9b4'], [2460.565085, '#7fcdbb'], [9889.894073, '#41b6c4'], [25813.504845, '#2c7fb8'], [110388.642003, '#253494']]
             },
             'fill-extrude-base': 0
     
@@ -129,7 +101,7 @@ map.on('load', function () {
         "paint": {
             'fill-color': {
               property: '_sum',
-              stops: [[0, '#160e23'], [2460.565085, '#291f3d'], [9889.894073, '#131e2f'], [25813.504845, '#106889'], [110388.642003, '#43afbf']]
+              stops: [[0, '#c7e9b4'], [2460.565085, '#7fcdbb'], [9889.894073, '#41b6c4'], [25813.504845, '#2c7fb8'], [110388.642003, '#253494']]
             },
             
             'fill-extrude-base': 0
@@ -142,12 +114,33 @@ var stateLegendEl = document.getElementById('state-legend');
       map.easeTo ({
           pitch: ('0')
       })
-  }
+      map.setPaintProperty('Norfolk', 'fill-extrude-height',                   
+        {            
+            'type': 'identity',
+            'property': ''
+        });
+      map.setPaintProperty('Portsmouth', 'fill-extrude-height',                   
+        {            
+            'type': 'identity',
+            'property': ''
+        }
+    )}
   function tiltb() {
-       map.easeTo ({
+      map.easeTo ({
           pitch: ('90')
-  }
-)}
+      })
+      map.setPaintProperty('Norfolk', 'fill-extrude-height',                   
+        {            
+            'type': 'identity',
+            'property': 'ELEV'
+        });
+      map.setPaintProperty('Portsmouth', 'fill-extrude-height',                   
+        {            
+            'type': 'identity',
+            'property': 'HGT2dSP'
+        }
+    )}
+
 </script>
 
 </body>
